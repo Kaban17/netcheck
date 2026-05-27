@@ -1,28 +1,28 @@
 # netcheck
 
-netcheck — это консольная утилита для быстрой диагностики сетевого соединения. Она позволяет проверять задержку (ping), скорость загрузки, работу DNS и получать информацию о текущем сетевом окружении.
+netcheck is a command-line utility for quick network diagnostics. It allows you to check latency (ping), download speed, DNS resolution, and retrieve information about the current network environment.
 
-Проект реализован с использованием принципов Clean Architecture (Чистая архитектура), что обеспечивает высокую тестируемость, гибкость и чистоту кода.
+The project is implemented using Clean Architecture principles, ensuring high testability, flexibility, and code maintainability.
 
-## Возможности
+## Features
 
-- TCP Ping: Проверка латентности до популярных DNS-серверов (Google, Cloudflare, OpenDNS, Quad9). Расчет min/avg/max и джиттера.
-- DNS Resolution: Проверка времени разрешения популярных доменов.
-- Speed Test: Измерение скорости загрузки с использованием CDN Cloudflare.
-- Network Info: Отображение публичного IP, данных об ISP, локальных интерфейсов и проверка шлюза по умолчанию.
+- TCP Ping: Check latency to popular DNS servers (Google, Cloudflare, OpenDNS, Quad9). Calculates min/avg/max and jitter.
+- DNS Resolution: Measure resolution time for popular domains.
+- Speed Test: Measure download speed using Cloudflare CDN.
+- Network Info: Display public IP, ISP details, local interfaces, and default gateway check.
 
-## Архитектура
+## Architecture
 
-Проект организован по слоям:
+The project is organized into layers:
 
-1. Domain: Ядро системы. Содержит основные модели данных (PingResult, IPInfo и др.) и интерфейсы репозиториев. Не зависит от других слоев.
-2. UseCase: Бизнес-логика приложения. Оркестрирует выполнение сетевых проверок. Зависит только от слоя Domain.
-3. Infrastructure: Реализация интерфейсов для работы с внешним миром (сеть, HTTP, ОС).
-4. UI/CLI: Интерфейсные адаптеры. Обработка команд пользователя (Handler) и форматирование вывода в терминал (Presenter).
+1. Domain: The core of the system. Contains main data models (PingResult, IPInfo, etc.) and repository interfaces. It does not depend on other layers.
+2. UseCase: Application business logic. Orchestrates network checks. Depends only on the Domain layer.
+3. Infrastructure: Implementation of interfaces for interacting with the external world (network, HTTP, OS).
+4. UI/CLI: Interface adapters. Handles user commands (Handler) and formats terminal output (Presenter).
 
-## Установка
+## Installation
 
-Убедитесь, что у вас установлен Go.
+Ensure you have Go installed on your system.
 
 ```bash
 git clone https://github.com/youruser/netcheck.git
@@ -30,38 +30,38 @@ cd netcheck
 go build -o netcheck ./cmd/netcheck/main.go
 ```
 
-## Использование
+## Usage
 
-Запуск всех проверок:
+Run all checks:
 ```bash
 ./netcheck all
-# или просто
+# or simply
 ./netcheck
 ```
 
-Запуск конкретных модулей:
+Run specific modules:
 ```bash
-./netcheck ping   # Только задержка
-./netcheck dns    # Только DNS
-./netcheck speed  # Тест скорости
-./netcheck info   # Сетевая информация
+./netcheck ping   # Latency only
+./netcheck dns    # DNS only
+./netcheck speed  # Speed test only
+./netcheck info   # Network information only
 ```
 
-Справка:
+Help:
 ```bash
 ./netcheck help
 ```
 
-## Разработка
+## Development
 
-Структура папок соответствует стандартам Go:
-- cmd/netcheck: Точка входа для сборки бинарного файла.
-- internal/: Внутренняя логика, скрытая от импорта другими проектами.
-- internal/domain: Сущности и интерфейсы.
-- internal/usecase: Интеракторы (бизнес-правила).
-- internal/infrastructure: Работа с сетью и HTTP.
-- internal/ui: Специфичный для CLI код (цвета, презентер).
+The folder structure follows standard Go conventions:
+- cmd/netcheck: Entry point for building the binary.
+- internal/: Internal logic, hidden from import by other projects.
+- internal/domain: Entities and interfaces.
+- internal/usecase: Interactors (business rules).
+- internal/infrastructure: Network and HTTP logic.
+- internal/ui: CLI-specific code (colors, presenter).
 
-## Лицензия
+## License
 
 MIT
